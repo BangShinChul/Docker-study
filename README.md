@@ -139,3 +139,13 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 ```
 $ docker rm $(docker ps -a -q -f status=exited)
 ```
+
+아래의 명령어로 컨테이너를 실행시킴과 동시에 컨테이너에 접속할 수 있습니다.
+
+```
+$ docker run -it ubuntu
+
+root@d4127a5c2503:/# cat /etc/issue
+Ubuntu 18.04.1 LTS \n \l
+
+```
