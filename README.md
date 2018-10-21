@@ -115,7 +115,8 @@ Docker는 이미지를 컨테이너화 시켜 올렸다 내립니다.<br>
 즉, 컨테이너화 시킨다는것은 이미지만큼의 메모리용량을 격리시킨다는 이야기입니다.<br>
 그리고 Docker는 컨테이너를 내려도 컨테이너만 내렸을 뿐이지 삭제시키지는 않습니다.<br>
 <br>
-아래의 명렁어 처럼 컨테이너의 이름으로 직접 rm(삭제)를 해주어야 완벽하게 컨테이너가 삭제됩니다.
+아래의 명렁어 처럼 컨테이너의 이름으로 직접 rm(삭제)를 해주어야 완벽하게 컨테이너가 삭제됩니다.<br>
+이런 작업은 효율적인 메모리관리를 위해 꼭 필요합니다.
 
 ```
 $ docker run ubuntu
@@ -131,4 +132,10 @@ vibrant_cori
 $ docker container ls -all
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 
+```
+
+만약 exited된 컨테이너가 많을 경우 아래의 명령어로 한번에 처리할 수 있습니다.
+
+```
+$ docker rm $(docker ps -a -q -f status=exited)
 ```
