@@ -154,7 +154,17 @@ Ubuntu 18.04.1 LTS \n \l
 아래의 STATUS를 보면 STATUS가 Exited가 아니라 Up으로 되어있는걸 확인해볼 수 있습니다.
 
 ```
-& CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 5e35d722aa40        ubuntu              "/bin/bash"         28 seconds ago      Up 28 seconds                           test
 
+```
+
+현재의 올려놓은 컨테이너를 이미지화 하고 싶다면 아래의 명령어처럼 입력해줍니다.
+예를 들어, test라는 이름으로 ubuntu:latest 이미지를 컨테이너로 띄웠다고 가정합니다.
+이 test라는 컨테이너를 이미지화 시키는 명령어는 아래와 같습니다.
+
+```
+$ sudo docker commit test ubuntu:test
+
+sha256:a72c5f89f7232c7f32402b871c26f014bbe2cdc63f168eaa27731b1edc059e22
 ```
