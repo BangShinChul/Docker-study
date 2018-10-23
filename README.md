@@ -119,7 +119,7 @@ Docker는 이미지를 컨테이너화 시켜 올렸다 내립니다.<br>
 이런 작업은 효율적인 메모리관리를 위해 꼭 필요합니다.
 
 ```
-$ docker run ubuntu
+$ docker run ubuntu # 이렇게 해도 됩니다 -> $ docker run -it --name 컨테이너이름 이미지이름
 
 $ docker container ls -all
 
@@ -140,7 +140,7 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 $ docker rm $(docker ps -a -q -f status=exited)
 ```
 
-아래의 명령어로 컨테이너를 실행시킴과 동시에 컨테이너에 접속할 수 있습니다.
+아래의 명령어 처럼 컨테이너를 실행시킬 때 -it를 붙여주면 컨테이너 생성과 동시에 컨테이너의 bash를 사용 접속할 수 있습니다.
 
 ```
 $ docker run -it ubuntu
