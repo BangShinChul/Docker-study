@@ -121,7 +121,7 @@ Docker는 이미지를 컨테이너화 시켜 올렸다 내립니다.<br>
 ```
 $ docker run ubuntu # 이렇게 해도 됩니다 -> $ docker run -it --name 컨테이너이름 이미지이름
 
-$ docker container ls -all
+$ docker container ls -all # 이것도 마찬가지로 이렇게 해도 됩니다 -> $docker ps -a
 
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                      PORTS               NAMES
 fef37a3fdb10        ubuntu              "/bin/bash"         25 seconds ago      Exited (0) 24 seconds ago                   vibrant_cori
@@ -154,6 +154,8 @@ Ubuntu 18.04.1 LTS \n \l
 아래의 STATUS를 보면 STATUS가 Exited가 아니라 Up으로 되어있는걸 확인해볼 수 있습니다.
 
 ```
+$ docker ps -a
+
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 5e35d722aa40        ubuntu              "/bin/bash"         28 seconds ago      Up 28 seconds                           test
 
