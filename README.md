@@ -49,7 +49,7 @@ Ubuntu 18.04.1 LTS \n \l
 아래의 STATUS를 보면 STATUS가 Exited가 아니라 Up으로 되어있는걸 확인해볼 수 있습니다.
 
 ```
-# ubuntu 컨테이너에 접속되어 있는 상태
+# ubuntu:latest 컨테이너에 접속되어 있는 상태
 
 root@07553afdf72c:/# cat /etc/issue
 
