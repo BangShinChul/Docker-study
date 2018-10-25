@@ -42,7 +42,7 @@ Ubuntu 18.04.1 LTS \n \l
 
 <br><br>
 
-### ctrl + p + q
+### ctrl + p + q (mac의 경우 ^ + p + q)
 
 > 컨테이너에 접속한 뒤 ctrl+p,q를 누르면 컨테이너를 exit하지않고 bash를 빠져나올 수 있습니다.
 
@@ -140,6 +140,50 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 
 <br><br>
 
+
+### docker rm {container-name or container-id}
+
+> rm 명령어를 통해 컨테이너를 삭제할 수 있습니다.
+
+Docker는 이미지를 컨테이너화 시켜 올렸다 내립니다.<br>
+컨테이너는 이미지가 사용할 메모리 용량만큼만의 메모리를 격리시켜 사용하는 기술입니다.<br>
+즉, 컨테이너화 시킨다는것은 이미지만큼의 메모리용량을 격리시킨다는 이야기입니다.<br>
+그리고 Docker는 컨테이너를 내려도 컨테이너만 내렸을 뿐이지 삭제시키지는 않습니다.<br>
+<br>
+아래의 명렁어 처럼 컨테이너의 이름으로 직접 rm(삭제)를 해주어야 완벽하게 컨테이너가 삭제됩니다.<br>
+이런 작업은 효율적인 메모리관리를 위해 꼭 필요합니다.
+
+```
+# 삭제 테스트용 컨테이너 run
+$ docker run ubuntu # 이렇게 해도 됩니다 -> $ docker run -it --name 컨테이너이름 이미지이름
+
+# 삭제할 컨테이너를 검색하기 위해 ls 명령어 실행
+$ docker container ls -all # 이것도 마찬가지로 이렇게 해도 됩니다 -> $docker ps -a
+
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                      PORTS               NAMES
+fef37a3fdb10        ubuntu              "/bin/bash"         25 seconds ago      Exited (0) 24 seconds ago                   vibrant_cori # 컨테이너 확인
+
+# 컨테이너명으로 rm 명령어 실행하여 컨테이너 삭제
+$ docker container rm vibrant_cori
+
+vibrant_cori # 삭제 완료
+
+# 컨테이너가 정상적으로 삭제되었는지 확인하기 위해 ls 명령어 실행
+$ docker container ls -all
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+
+```
+
+<br><br>
+
+만약 exited된 컨테이너가 많을 경우 아래의 명령어로 한번에 처리할 수 있습니다.
+
+```
+$ docker rm $(docker ps -a -q -f status=exited)
+```
+
+<br><br>
+
 ### docker search {image-name}
 
 > 원하는 도커 이미지를 docker hub에서 검색할 수 있습니다.
@@ -232,45 +276,50 @@ hello-world         latest              4ab4c602aa5e        6 weeks ago         
 
 <br><br>
 
-### docker rm {container-name or container-id}
+### docker rmi {OPTION: repository-name}/{image-name}:{OPTION: tag}
 
-> rm 명령어를 통해 컨테이너를 삭제할 수 있습니다.
-
-Docker는 이미지를 컨테이너화 시켜 올렸다 내립니다.<br>
-컨테이너는 이미지가 사용할 메모리 용량만큼만의 메모리를 격리시켜 사용하는 기술입니다.<br>
-즉, 컨테이너화 시킨다는것은 이미지만큼의 메모리용량을 격리시킨다는 이야기입니다.<br>
-그리고 Docker는 컨테이너를 내려도 컨테이너만 내렸을 뿐이지 삭제시키지는 않습니다.<br>
-<br>
-아래의 명렁어 처럼 컨테이너의 이름으로 직접 rm(삭제)를 해주어야 완벽하게 컨테이너가 삭제됩니다.<br>
-이런 작업은 효율적인 메모리관리를 위해 꼭 필요합니다.
+> 지우고싶은 이미지가 있을 경우 rmi 명령어로 이미지를 삭제할 수 있습니다.
 
 ```
-# 삭제 테스트용 컨테이너 run
-$ docker run ubuntu # 이렇게 해도 됩니다 -> $ docker run -it --name 컨테이너이름 이미지이름
+$ docker images
 
-# 삭제할 컨테이너를 검색하기 위해 ls 명령어 실행
-$ docker container ls -all # 이것도 마찬가지로 이렇게 해도 됩니다 -> $docker ps -a
+REPOSITORY           TAG                 IMAGE ID            CREATED             SIZE
+ubuntu-test/ubuntu   test                11d480933762        3 hours ago         85.8MB # 삭제할 이미지
+ubuntu               latest              ea4c82dcd15a        6 days ago          85.8MB
+postgres             latest              7a2907672aab        6 days ago          311MB
+node                 latest              a2b9536415c2        8 days ago          674MB
+nginx                latest              dbfc48660aeb        8 days ago          109MB
+ubuntu               16.04               b9e15a5d1e1a        7 weeks ago         115MB
 
-CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                      PORTS               NAMES
-fef37a3fdb10        ubuntu              "/bin/bash"         25 seconds ago      Exited (0) 24 seconds ago                   vibrant_cori # 컨테이너 확인
 
-# 컨테이너명으로 rm 명령어 실행하여 컨테이너 삭제
-$ docker container rm vibrant_cori
+$ docker rmi ubuntu-test/ubuntu:test  # 이미지 삭제 명령어 실행
 
-vibrant_cori # 삭제 완료
+Untagged: ubuntu-test/ubuntu:test
+Deleted: sha256:11d480933762769e0adf8de5c44ccf70d7dc9633df962699013d814e56ae8409
+Deleted: sha256:3927c2ba156a7cfbaa161b4fb2c6b05ecb3425feae2761eeb92bdc11dcd09329
 
-# 컨테이너가 정상적으로 삭제되었는지 확인하기 위해 ls 명령어 실행
-$ docker container ls -all
-CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+
+$ docker images # 이미지가 정상적으로 삭제되었는지 확인
+
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+ubuntu              latest              ea4c82dcd15a        6 days ago          85.8MB
+postgres            latest              7a2907672aab        6 days ago          311MB
+node                latest              a2b9536415c2        8 days ago          674MB
+nginx               latest              dbfc48660aeb        9 days ago          109MB
+ubuntu              16.04               b9e15a5d1e1a        7 weeks ago         115MB
 
 ```
 
 <br><br>
 
-만약 exited된 컨테이너가 많을 경우 아래의 명령어로 한번에 처리할 수 있습니다.
+### docker diff {container-id}
+
+> 컨테이너 내부의 변경사항을 확인해볼 수 있는 명령어입니다.
 
 ```
-$ docker rm $(docker ps -a -q -f status=exited)
+
+$ docker diff
+
 ```
 
 <br><br>
