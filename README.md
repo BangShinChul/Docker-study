@@ -8,7 +8,9 @@ Docker를 사용하면서 공부한것을 적어놓는 곳입니다.
 
 ***
 
-### docker 설치
+### docker install
+
+> 아래 명령어를 통해 Ubuntu에서 docker를 설치할 수 있습니다.
 
 ```
 $ sudo apt-get install docker
@@ -16,7 +18,7 @@ $ sudo apt-get install docker
 
 <br><br>
 
-### docker run
+### docker run {image-name:tag}
 
 > run 명령어를 통해 image를 container로 올려 실행시킵니다.
 
@@ -53,12 +55,16 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 
 <br><br>
 
-### docker conatiner ls : 현재 컨테이너 상태를 알아볼 수 있는 명령어 입니다.
+### docker conatiner ls
 
-> 혹은 간단하게 docker ps -a 를 사용해도 됩니다.
+> 아래의 명령어로 현재 docker 내의 컨테이너 상태를 확인할 수 있습니다.
 
 ```
 $ docker container ls
+
+# 위 명령어는 아래와 동일합니다.
+
+$ docker ps
 ```
 
 <br><br>
@@ -67,11 +73,15 @@ $ docker container ls
 
 ```
 $ docker container ls --all
+
+# 위 명령어 또한 아래와 동일합니다.
+
+$ docker ps -a
 ```
 
 <br><br>
 
-### docker restart
+### docker restart {image-name or container-id}
 
 > restart 명령어를 통해 종료된 컨테이너를 재실행 시킬 수 있습니다.
 
@@ -99,6 +109,8 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 ### docker search {image-name}
 
 > 원하는 도커 이미지를 docker hub에서 검색할 수 있습니다.
+
+search를 통해 원하는 이미지를 검색해서 NAME 값을 가지고 해당 이미지를 docker에 다운로드 할 수 있습니다.
 
 ```
 $ docker search ubuntu
@@ -161,6 +173,7 @@ hello-world         latest              4ab4c602aa5e        6 weeks ago         
 <br><br>
 
 이미지를 다운로드 받을 때 버젼의 태그명 없이 다운로드받을 경우 아래와 같습니다.
+기본적으로 지정된 태그명이 없을 경우 latest가 기본으로 세팅되어 있습니다.
 
 ```
 $ docker pull ubuntu
@@ -185,7 +198,7 @@ hello-world         latest              4ab4c602aa5e        6 weeks ago         
 
 <br><br>
 
-### docker rm {컨테이너명}
+### docker rm {container-name or container-id}
 
 > rm 명령어를 통해 컨테이너를 삭제할 수 있습니다.
 
@@ -228,7 +241,7 @@ $ docker rm $(docker ps -a -q -f status=exited)
 
 <br><br>
 
-### docker commit {컨테이너명 혹은 컨테이너ID} {옵션: 리포지토리명}/{이미지명}:{태그명(사용자정의)}
+### docker commit {container-name or container-id} {OPTION: repository-name}/{image-name}:{OPTION: tag}
 
 > commit 명령어를 통해 컨테이너를 이미지화 시킬 수 있습니다.
 
