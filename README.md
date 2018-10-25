@@ -71,6 +71,30 @@ $ docker container ls --all
 
 <br><br>
 
+### docker restart
+
+> restart 명령어를 통해 종료된 컨테이너를 재실행 시킬 수 있습니다.
+
+아래는 ubuntu라는 이름의 Exited된 컨테이너를 restart 시키는 예제입니다.
+
+```
+$ docker ps -a
+
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                   PORTS               NAMES
+07553afdf72c        ubuntu              "/bin/bash"         2 hours ago         Exited (0) 2 hours ago                       ubuntu
+
+$ docker restart ubuntu
+
+ubuntu
+
+Noahui-MacBook-Pro:~ noah$ docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+07553afdf72c        ubuntu              "/bin/bash"         2 hours ago         Up 4 seconds                            ubuntu
+
+```
+
+<br><br>
+
 ### docker search {image-name}
 
 > 원하는 도커 이미지를 docker hub에서 검색할 수 있습니다.
