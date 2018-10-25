@@ -42,14 +42,48 @@ Ubuntu 18.04.1 LTS \n \l
 
 <br><br>
 
-컨테이너에 접속한 뒤 ctrl+p,q를 누르면 컨테이너를 exit하지않고 bash를 빠져나올 수 있습니다.
+### ctrl + p + q
+
+> 컨테이너에 접속한 뒤 ctrl+p,q를 누르면 컨테이너를 exit하지않고 bash를 빠져나올 수 있습니다.
+
 아래의 STATUS를 보면 STATUS가 Exited가 아니라 Up으로 되어있는걸 확인해볼 수 있습니다.
 
 ```
+# ubuntu 컨테이너에 접속되어 있는 상태
+
+root@07553afdf72c:/# cat /etc/issue
+
+Ubuntu 18.04.1 LTS \n \l
+
+# ctrl + p + q 입력
+
+# 컨테이너에서 빠져나옴
+$ 
+
 $ docker ps -a
 
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 5e35d722aa40        ubuntu              "/bin/bash"         28 seconds ago      Up 28 seconds                           test
+
+```
+
+<br><br>
+
+### docker attach {container-name or container-id}
+
+> 빠져나온 컨테이너 안으로 다시 접속하고 싶다면 attach 명령어를 이용할 수 있습니다.
+
+```
+$ docker ps
+
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+07553afdf72c        ubuntu              "/bin/bash"         2 hours ago         Up 5 minutes                            ubuntu
+
+$ docker attach ubuntu
+
+root@07553afdf72c:/# cat /etc/issue
+
+Ubuntu 18.04.1 LTS \n \l
 
 ```
 
