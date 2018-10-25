@@ -87,7 +87,8 @@ $ docker restart ubuntu
 
 ubuntu
 
-Noahui-MacBook-Pro:~ noah$ docker ps -a
+$ docker ps -a
+
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
 07553afdf72c        ubuntu              "/bin/bash"         2 hours ago         Up 4 seconds                            ubuntu
 
