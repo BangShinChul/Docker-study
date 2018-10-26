@@ -379,7 +379,6 @@ FROM: 어떤 이미지를 기반으로 할지 설정합니다. Docker 이미지�
 MAINTAINER: 메인테이너 정보입니다.<br>
 RUN: Shell 스크립트 혹은 명령을 실행합니다.<br>
 이미지 생성 중에는 사용자 입력을 받을 수 없으므로 apt-get install 명령에서 -y 옵션을 사용합니다(yum install도 동일).<br>
-나머지는 nginx 설정입니다.<br>
 VOLUME: 호스트와 공유할 디렉터리 목록입니다. docker run 명령에서 -v 옵션으로 설정할 수 있습니다. 예) -v /root/data:/data 호스트의 /root/data 디렉터리를 Docker 컨테이너의 /data 디렉터리에 연결합니다.<br>
 CMD: 컨테이너가 시작되었을 때 실행할 실행 파일 또는 스크립트입니다.<br>
 WORKDIR: CMD에서 설정한 실행 파일이 실행될 디렉터리입니다.<br>
