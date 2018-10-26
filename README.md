@@ -360,3 +360,61 @@ nginx                latest              dbfc48660aeb        8 days ago         
 ubuntu               16.04               b9e15a5d1e1a        7 weeks ago          115MB
 
 ```
+
+<br><br>
+
+### docker build --tag {image-name}:{tag} .
+
+> Dockerfile이 저장된 디렉터리에서 Dockerfile에 입력해놓은 명령을 실행하여 새로운 이미지를 만듭니다.
+
+만약 여러개의 이미지를 조합하여 새로운 이미지를 만들고 싶다면 build 명령어로 새로운 이미지를 만들 수 있습니다.<br>
+예를 들어, node.js + mysql + ubuntu:16.04 조합의 이미지를 만들고 싶다면 Dockerfile내에 명령어를 입력하여<br>
+하나의 이미지 안에 여러개의 애플리케이션을 설치하고 세팅하여 새로운 이미지를 만들어낼 수 있습니다.<br>
+<br>
+아래는 로컬의 node.js 애플리케이션을 ubuntu:16.04 이미지와 합쳐서 새로운 이미지를 만드는 예제입니다.<br> 
+<br>
+Dockerfile은 아래의 명령어들로 이루어져 있습니다.
+
+
+
+```
+
+# /testProject/app.js
+
+const express = require('express');
+const app = express();
+
+
+// json 사용을 위한 미들웨어 추가
+app.use(express.json());
+
+app.get('/' ,(req,res) => {
+    res.send('Hello world! every bdy\n');
+});
+
+app.get('/test', (req,res) => {
+    console.log(req.body);
+    console.log(req.params);
+    console.log(req.query);
+    res.send('complete!\n');
+});
+
+
+app.listen(3000, () => {
+    console.log('Example app listening on port 3000!');
+});
+
+/////////
+
+# /testProject/Dockerfile
+
+FROM node:6
+COPY package.json /src/package.json
+RUN cd /src; npm install
+COPY . /src
+EXPOSE 3000
+WORKDIR /src
+
+CMD node app.js
+
+```
