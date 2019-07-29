@@ -38,6 +38,12 @@ $ docker run -it ubuntu
 root@d4127a5c2503:/# cat /etc/issue
 Ubuntu 18.04.1 LTS \n \l
 
+
+$ docker run -it --rm -p 8080:8080 tomcat:8.5-jre8 /bin/bash
+
+root@214cc0036ec5:/usr/local/tomcat# ls
+BUILDING.txt  CONTRIBUTING.md  LICENSE	NOTICE	README.md  RELEASE-NOTES  RUNNING.txt  bin  conf  include  lib	logs  native-jni-lib  temp  webapps  work
+
 ```
 
 <br><br>
